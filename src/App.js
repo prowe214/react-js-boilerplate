@@ -1,22 +1,31 @@
 import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
+function generateTwoNumbers() {
+  return [Math.floor(Math.random() * 3), Math.floor(Math.random() * 3)];
+}
+
 function App() {
+  const [numbers, setNumbers] = useState([]);
+  const [firstNumber, secondNumber] = numbers;
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div>
+          <div className='number'>{firstNumber}</div>
+          <div className='number'>{secondNumber}</div>
+        </div>
+
+        {(firstNumber === secondNumber) && (
+          <h1>MATCH!</h1>
+        )}
+
+        <button onClick={() => {
+          const randomNumbers = generateTwoNumbers();
+          setNumbers(randomNumbers);
+        }}>Generate 2 random numbers</button>
       </header>
     </div>
   );
